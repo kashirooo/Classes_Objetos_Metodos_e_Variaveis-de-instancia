@@ -1,28 +1,24 @@
-//figura 3.8 do livro
-//Com uma nova versao dio livro, anteriormente da imagem 3.5
-//Criando e manipulando um objeto GradeBook.
-import java.util.Scanner;
+//figura 3.11 do livro
+//Com uma nova versao dio livro, anteriormente da imagem 3.8
+//Construtor é utilizado para especificar o nome do curso na hora que cada objeto é criado  
 
 public class GradeBookTeste{
 
     //metodo main inicia a execucao de programa
     public static void main(String[] args){
 
-        //cria Scanner para obter entrada a partir da janela de comando
-        Scanner input = new Scanner(System.in);
+        //cria um objeto GradeBook 
+    GradeBook myGradeBook1 = new GradeBook ("Hamburgueria de Heróis ", null);
+    GradeBook myGradeBook2 = new GradeBook ("Esmalteria da Ju ", null);
+    GradeBook myGradeBook3 = new GradeBook ("JAVA Teste ", "Paulo"); //Este último foi para fins de teste
 
-        //cria um objeto GradeBook e o atribui a myGradeBook
-        GradeBook myGradeBook = new GradeBook();
 
-        //exibe valor inicial de courseName
-        System.out.println("o nome do curso inicialmente é: " + myGradeBook.getcourseName());
+    //exibe valor inicial de courseName para cada GradeBook
+    System.out.println("O nome da lista de notas 1 é: " + myGradeBook1.getcourseName());
+    System.out.println("O nome da lista de notas 2 é: " + myGradeBook2.getcourseName());
+    System.out.println("O nome da lista de notas 3 é: " + myGradeBook3.getcourseName());
 
-        //solicita e lê o nome do curso 
-        System.out.println("por favor entre com o nome do curso: ");
-        String theName = input.nextLine(); //lê uma linha de texto.
-        myGradeBook.setcourseName(theName); // configura o nome do curso
-        System.out.println(); //gera saida de uma linha em branco
-        // exibe uma mensagem de boas vindas, após especificar o nome do curso
-        myGradeBook.displayMessage();
+
+        
     } //fim da main
 }

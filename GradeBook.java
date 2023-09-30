@@ -1,21 +1,32 @@
-//Figura 3.7 do livro
-//Com uma nova versão agora, anteriormente com a imagem 3.4
-//adiciona vários métodos a classe tambem uma variável de instância com um modificador de acesso (private).
+//Figura 3.10 do livro
+//Com uma nova versão agora, anteriormente com a imagem 3.7
+//cria agora um objeto com construtor
 
 public class GradeBook{
 
     private String courseName; // nome do curso para esse GradeBook
+    private String instructor; // mais uma variavel de instancia para teste
 
-    //metodo para configurar o nome do curso
-    public void setcourseName (String name){
+    //o construtor inicializa courseName com o argumento String
+    //aumentando o parametro para fins de teste
+    public GradeBook(String name, String instructorName){
 
-        courseName = name; // armazena o nome do curso
-    }// fim do metodo setCourseName
+        courseName = name; // inicializa courseName
+        instructor = instructorName;
+    }// fim do construtor
+
+    //método para configurar o nome do curso
+    public void setcourseName(String name){
+        courseName = name; //armazena o nome do curso
+        
+    } // fim do método setcourseName
 
     //metodo para recuperar o nome do curso
+    //continuando com o teste adicionando mais um return (o que sem a documentação me deu um trabalhao)
     public String getcourseName(){
 
-        return courseName;
+        return courseName + instructor;
+
     }// fim do metodo getcourseName
 
     //exibe uma mensagem de boas vindas para o usuario GradeBook
