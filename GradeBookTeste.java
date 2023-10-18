@@ -1,24 +1,19 @@
-//figura 3.11 do livro
-//Com uma nova versao dio livro, anteriormente da imagem 3.8
-//Construtor é utilizado para especificar o nome do curso na hora que cada objeto é criado  
+//figura 5.10 do livro
+//Com uma nova versao do livro, que utiliza todo o pontecial da classe GradeBook
+//e exibe as notas inseridas no relatório de notas
 
 public class GradeBookTeste{
 
-    //metodo main inicia a execucao de programa
+    //metodo main inicia a execução de programa
     public static void main(String[] args){
 
-        //cria um objeto GradeBook 
-    GradeBook myGradeBook1 = new GradeBook ("Hamburgueria de Heróis ", null);
-    GradeBook myGradeBook2 = new GradeBook ("Esmalteria da Ju ", null);
-    GradeBook myGradeBook3 = new GradeBook ("JAVA Teste ", "Paulo"); //Este último foi para fins de teste
+        //criando o objeto myGradeBook da classe GradeBook
+        //passa o nome do curso para o construtor
+        GradeBook myGradeBook = new GradeBook("Introdução ao Programa Java!!");
 
-
-    //exibe valor inicial de courseName para cada GradeBook
-    System.out.println("O nome da lista de notas 1 é: " + myGradeBook1.getcourseName());
-    System.out.println("O nome da lista de notas 2 é: " + myGradeBook2.getcourseName());
-    System.out.println("O nome da lista de notas 3 é: " + myGradeBook3.getcourseName());
-
-
+        myGradeBook.displayMessage();
+        myGradeBook.inputGrades();
+        myGradeBook.displayGradeReport();
         
-    } //fim da main
-}
+    } //fim da Main
+} // fim da classe GradeBookTeste
