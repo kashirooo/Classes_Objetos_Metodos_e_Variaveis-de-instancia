@@ -7,7 +7,8 @@ public class OperadoresLogicos {
      {
        // cria a tabelaverdade para o operador && (E condicional)
         System.out.printf( "%s\n%s: %b\n%s: %b\n%s: %b\n%s: %b\n\n",
-           "Conditional AND (&&)", "false && false", ( false && false ),
+           "Conditional AND (&&)", 
+           "false && false", ( false && false ),
            "false && true", ( false && true ), 
            "true && false", ( true && false ),
            "true && true", ( true && true ) );

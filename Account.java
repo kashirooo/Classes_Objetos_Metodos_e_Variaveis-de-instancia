@@ -32,7 +32,6 @@ public class Account{
         //debita quantia ao saldo
     if(quantia <= balanco){
         balanco = balanco - quantia;
-        double balanco;
     }
     //exibe mensagem que a quantia retirada é maior que o saldo
     if(quantia > balanco){

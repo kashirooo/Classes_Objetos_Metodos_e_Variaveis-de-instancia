@@ -38,24 +38,24 @@ public class GradeBook{
     }//fim do metodo displayMessage
 
     public void inputGrades(){
-        Scanner input = new Scanner (System.in);
-        
-        int grade; // nota inserida pelo usuario
-        System.out.printf("%s\n%s\n    %s\n    %s\n",
-        "Entre com o numero da nota no raio de 0-100",
-        "digite o fim-da-linha indicado para terminar de inserir: ",
-        "No UNIX/Linux/MAC OS x digite <Ctrl> d e então pressione Enter",
-        "No Windows digite <Ctrl> z e entao pressione Enter");
+        try (Scanner input = new Scanner (System.in)) {
+            int grade; // nota inserida pelo usuario
+            System.out.printf("%s\n%s\n    %s\n    %s\n",
+            "Entre com o numero da nota no raio de 0-100",
+            "digite o fim-da-linha indicado para terminar de inserir: ",
+            "No UNIX/Linux/MAC OS x digite <Ctrl> d e então pressione Enter",
+            "No Windows digite <Ctrl> z e entao pressione Enter");
 
-        //faz um loop até usuario inserir o indicador de fim do arquivo
-        while(input.hasNext()){
-            grade = input.nextInt(); // e a nota inserida
-            total += grade; // adiciona nota inserida a total
-            ++gradeCounter; // incremento
+            //faz um loop até usuario inserir o indicador de fim do arquivo
+            while(input.hasNext()){
+                grade = input.nextInt(); // e a nota inserida
+                total += grade; // adiciona nota inserida a total
+                ++gradeCounter; // incremento
 
-            //chama método para incrementar o contador adequado
-            incrementLetterGradeCounter(grade);
-        } //fim do while
+                //chama método para incrementar o contador adequado
+                incrementLetterGradeCounter(grade);
+            } //fim do while
+        }
     } // fim do metodo inputGrades
 
     //adiciona 1 ao contador adequado da nota especifica
