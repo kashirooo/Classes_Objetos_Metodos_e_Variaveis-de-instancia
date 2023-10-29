@@ -5,8 +5,8 @@ public class MaximumFinderTest {
 
     public static void main(String[] args) {
         
-        MaximumFinder MaximumFinder = new MaximumFinder();
-        MaximumFinder.determineMaximun();
-    
+        MaximumFinder maximumFinder = new MaximumFinder();
+        maximumFinder.determineMaximun();
+        System.out.println(MaximumFinder.test()); //chamando o metodo diretamente da classe MaximumFinder
     } // fim do main
 } // fim da classe

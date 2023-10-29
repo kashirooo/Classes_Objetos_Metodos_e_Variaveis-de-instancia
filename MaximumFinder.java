@@ -25,16 +25,14 @@ public class MaximumFinder {
     //retorna o máximo  dos seus três parâmetros de double
     public double maximum(double x, double y, double z){
 
-        double maximumValue = x; // supõe que x é o maior número
-
-        // determina se y é maior que maximumValue
-        if (y > maximumValue)
-        maximumValue = y;
-
-        if (z > maximumValue)
-        maximumValue = z;
-
-        return maximumValue;
+        return Math.max(x, Math.max(y, z));
 
     } // fim do método maximum
+
+    //aqui estou fazendo um teste para chamar o método Static la no meu MaximumFind
+    public static String test(){
+         String testando = "Olá Mundo. Meu nome é Paulo e eu estou aprendendo Java na marra";
+         return testando;
+    }
+
 } // fim da classe MaximumFinder
