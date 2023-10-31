@@ -64,7 +64,7 @@ public class Craps {
         if (gameStatus == Status.WON)
             System.out.println("Você ganhou, Jogador(a)!!!");
         else
-        System.out.println("Você perder, Jogador(a) :( ");
+        System.out.println("Você perdeu, Jogador(a) :( ");
     } // fim do metodo play
 
     public int rollDice(){
