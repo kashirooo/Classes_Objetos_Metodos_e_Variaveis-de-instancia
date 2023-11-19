@@ -6,10 +6,10 @@
 public class GradeBook{
 
     private String courseName; // nome do curso para esse GradeBook
-    private int[] grades; // array de notas de aluno
+    private int[][] grades; // array bidimensional de notas de aluno
 
     //construtor de dois argumentos inicializa courseName e o array de Notas
-    public GradeBook(String name, int[] gradesArray){
+    public GradeBook(String name, int[][] gradesArray){
 
         courseName = name; // inicializa courseName
         grades = gradesArray; // niveis de armazenamento
@@ -42,12 +42,10 @@ public class GradeBook{
         //gera saída de array de notas
         outputGrades();
 
-
-        // chama método getAvarage para definir a nota média
-        System.out.printf("\nMédia de notas da Classe é %.2f\n", getAvarage());
-
         // chama métodos getMinimum e getMaximum
-        System.out.printf("A nota mais baixa é: %d\nA nota mais alta é: %d\n\n", getMinimum(),getMaximum());
+        System.out.printf(  "\n%s %d\n%s %d\n\n",
+        "A nota mais baixa é: \n", getMinimum(),
+        "A nota mais alta é: \n\n",getMaximum());
 
         // chama outputBarChart para imprimir gráfico de distribuição de notas
         outputBarChart();
@@ -56,44 +54,52 @@ public class GradeBook{
 
     // localiza a nota minima
     public int getMinimum(){
-        int lowGrade = grades[0]; //assume que grades é [0] é a menor nota
+        int lowGrade = grades[0][0]; //assume que grades é [0] é a menor nota
 
-        // faz um loop pelo array de notas
-        for (int grade : grades){
-            // se nota for mais baixa que lowGrade, essa nota é atribuída a lowGrade
-            if (grade < lowGrade)
-            lowGrade = grade; // nova nota mais baixa
+        // faz um loop pelas linhas do array de notas
+        for (int[] studentsGrades : grades){
+            
+            // faz um loop pelas colunas da linha atual
+            for (int grade : studentsGrades){
+                // se a nota for menor que lowGrade, atribui a nota a lowGrade
+                if ( grade < lowGrade)
+                    lowGrade = grade;
+            } // fim do for interno
         } // fim do for
 
-        return lowGrade;
+        return lowGrade; //retorna nota mais baixa
     } // fim do método getMinimum
 
     public int getMaximum(){
 
-        int highGrade = grades [0]; // assume que grades é [0] é a maior nota
+        int highGrade = grades [0][0]; // assume que grades é [0] é a maior nota
 
-        // faz um loop pelo array de notas
-        for (int grade : grades){
-            // se a nota for mais alta que highGrade, essa nota é atribuída a highGrade
-            if (grade > highGrade)
-            highGrade = grade;
+        // faz um loop pelas linhas do array de notas
+        for (int[] studentsGrades : grades){
+            
+            // faz um loop pelas colunas da linha atual
+            for (int grade : studentsGrades){
+                // se a nota for menor que highGrade, atribui a nota a highGrade
+                if ( grade > highGrade)
+                    highGrade = grade;
+            } // fim do for interno
         } // fim do for
 
-        return highGrade;
+        return highGrade; // retorna a nota mais alta
 
     } // fim do método getMaximum
 
-    //  determina média para o teste
-    public double getAvarage(){
+    //  determina média do conjunto particular de notas
+    public double getAvarage(int[]setOfGrades){
 
         int total = 0; // inicializa o total
 
         // soma as notas do aluno
-        for (int grade : grades)
+        for (int grade : setOfGrades)
         total += grade;
 
         // retorna a média de notas
-        return (double) total / grades.length;
+        return (double) total / setOfGrades.length;
 
     } // fim do método getAvarage
 
@@ -103,9 +109,11 @@ public class GradeBook{
         // armazena frequência de notas em cada intervalo de 10 notas
         int[] frequency = new int[11];
 
-        // para cada nota, incrementa a frequência apropriada
-        for (int grade : grades)
-        ++frequency[grade /10];
+        // para cada nota no GradeBook, incrementa a frequência certa
+        for (int[] studentsGrades : grades){
+            for(int grade : studentsGrades)
+            ++frequency [grade / 10];
+        } //fim do for externo
 
         // para cada frequência de nota, imprime barra no gráfico
         for (int count = 0; count < frequency.length; count++){
@@ -126,11 +134,28 @@ public class GradeBook{
     // gera a saída do conteúdo do array de notas
     public void outputGrades(){
 
-        System.err.println("As notas são:\n");
+        System.out.println("As notas são:\n");
+        System.out.print("              "); // alinha títulos de coluna
 
-        // gera a saída de nota de cada aluno
-        for (int student = 0; student < grades.length; student++)
-        System.out.printf("Estudante %2d: %3d\n", student + 1, grades [student]);
+        // cria um titulo de coluna para cada um dos teste
+        for (int test = 0; test < grades[0].length; test++)
+         System.out.printf("Teste %d  ", test + 1);
+         System.out.println("Média"); // título da coluna de média do aluno
+
+        // cria linhas/colunas de testo que representam notas de array
+        for (int student = 0; student < grades.length; student++){
+            System.out.printf("Estudante %2d", student +1);
+
+            for (int test : grades [student]) // gera saida de notas do aluno
+             System.out.printf("%8d", test);
+             
+             /**
+              * chama método getAvarage para calcular a média do aluno
+              * passa a linha  de notas como o argumento para getAvarage
+              */
+              double avarage = getAvarage(grades[student]);
+              System.out.printf("%9.2f\n", avarage);
+            } // fim do for externo
     } // fim do método outpuGrades
 
 } // fim da classe GradeBook
