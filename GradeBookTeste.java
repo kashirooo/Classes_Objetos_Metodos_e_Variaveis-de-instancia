@@ -7,13 +7,13 @@ public class GradeBookTeste{
     //metodo main inicia a execução de programa
     public static void main(String[] args){
 
+        int[] gradesArray = {87, 68, 94, 100, 83, 78, 85, 91, 76, 87};
+
         //criando o objeto myGradeBook da classe GradeBook
         //passa o nome do curso para o construtor
-        GradeBook myGradeBook = new GradeBook());
-
+        GradeBook myGradeBook = new GradeBook("Introdução ao curso de Java", gradesArray);
         myGradeBook.displayMessage();
-        myGradeBook.inputGrades();
-        myGradeBook.displayGradeReport();
+        myGradeBook.processGrades();
         
     } //fim da Main
 } // fim da classe GradeBookTeste

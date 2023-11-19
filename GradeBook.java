@@ -2,7 +2,6 @@
 //Com uma nova versão agora do Switch Case
 //introduzindo o conteudo   
 
-import java.util.Scanner;
 
 public class GradeBook{
 
