@@ -7,23 +7,23 @@ import java.util.Scanner;
 public class GradeBook{
 
     private String courseName; // nome do curso para esse GradeBook
-    private int total, gradeCounter, aCount, bCount, cCount, dCount, eCount;
+    private int[] grades; // array de notas de aluno
 
-    //o construtor inicializa courseName com o argumento String
-    //aumentando o parametro para fins de teste
-    public GradeBook(String name){
+    //construtor de dois argumentos inicializa courseName e o array de Notas
+    public GradeBook(String name, int[] gradesArray){
 
         courseName = name; // inicializa courseName
-    }// fim do construtor
+        grades = gradesArray; // niveis de armazenamento
+    }// fim do construtor de dois argumentos
 
     //método para configurar o nome do curso
     public void setCourseName(String name){
+
         courseName = name; //armazena o nome do curso
-        
+
     } // fim do método setcourseName
 
     //metodo para recuperar o nome do curso
-    //continuando com o teste adicionando mais um return (o que sem a documentação me deu um trabalhao)
     public String getCourseName(){
 
         return courseName;
@@ -37,73 +37,101 @@ public class GradeBook{
         System.out.println("Bem vindo ao Livro de notas do " + getCourseName());
     }//fim do metodo displayMessage
 
-    public void inputGrades(){
-        try (Scanner input = new Scanner (System.in)) {
-            int grade; // nota inserida pelo usuario
-            System.out.printf("%s\n%s\n    %s\n    %s\n",
-            "Entre com o numero da nota no raio de 0-100",
-            "digite o fim-da-linha indicado para terminar de inserir: ",
-            "No UNIX/Linux/MAC OS x digite <Ctrl> d e então pressione Enter",
-            "No Windows digite <Ctrl> z e entao pressione Enter");
+    //realiza váras operações nos dados
+    public void processGrades(){
 
-            //faz um loop até usuario inserir o indicador de fim do arquivo
-            while(input.hasNext()){
-                grade = input.nextInt(); // e a nota inserida
-                total += grade; // adiciona nota inserida a total
-                ++gradeCounter; // incremento
+        //gera saída de array de notas
+        outputGrades();
 
-                //chama método para incrementar o contador adequado
-                incrementLetterGradeCounter(grade);
-            } //fim do while
-        }
-    } // fim do metodo inputGrades
 
-    //adiciona 1 ao contador adequado da nota especifica
-    private void incrementLetterGradeCounter(int grade){
-        switch(grade / 10){
-            case 9: //a nota estava entre 90
-            case 10: //e 100 inclusivo
-            ++aCount; //incrementa aCount
-            break; //necessário para sair do switch
+        // chama método getAvarage para definir a nota média
+        System.out.printf("\nMédia de notas da Classe é %.2f\n", getAvarage());
 
-            case 8: // nota estava entre 80 e 89
-            ++bCount;
-            break;
+        // chama métodos getMinimum e getMaximum
+        System.out.printf("A nota mais baixa é: %d\nA nota mais alta é: %d\n\n", getMinimum(),getMaximum());
 
-            case 7: //a nota estava entr 70 e 79
-            ++cCount;
-            break;
+        // chama outputBarChart para imprimir gráfico de distribuição de notas
+        outputBarChart();
 
-            case 6: //a nota estava entre 60 e 69
-            ++dCount;
-            break;
+    } // fim do metodo processGrades
 
-            default: //a nota era menor que 60
-            ++eCount;
-            break;
-        } //fim do switch
-    }//fim do metodo incrementLetterGradeCounter
+    // localiza a nota minima
+    public int getMinimum(){
+        int lowGrade = grades[0]; //assume que grades é [0] é a menor nota
 
-    public void displayGradeReport(){
-        System.out.println("\nGrade Report:");
+        // faz um loop pelo array de notas
+        for (int grade : grades){
+            // se nota for mais baixa que lowGrade, essa nota é atribuída a lowGrade
+            if (grade < lowGrade)
+            lowGrade = grade; // nova nota mais baixa
+        } // fim do for
 
-        //se o usuario inseriu pelo menos uma nota
-        if (gradeCounter != 0){
+        return lowGrade;
+    } // fim do método getMinimum
 
-            double media = (double) total / gradeCounter;
+    public int getMaximum(){
 
-            //gera a saida de resumo de resultados
-            System.out.printf( "Total de %d notas inseridas foi de %d\n", gradeCounter, total);
-            System.out.printf("média da classe é %.2f\n", media);
-            System.out.printf( "%s\n%s%d\n%s%d\n%s%d\n%s%d\n%s%d\n",
-            "Número de estudantes que receberam cada nota:",
-            "A: ", aCount, 
-            "B: ", bCount,
-            "C: ", cCount,// EXIBE AS NOTAS A,B,C,D E E DE ACORDO COM CADA VARIAVEL DE INSTANCIA
-            "D: ", dCount,
-            "E: ", eCount);
-        } //Fim do if
-        else
-        System.out.println("Nenhuma nota inserida!");
-    }// fim do método displayGradeReport
+        int highGrade = grades [0]; // assume que grades é [0] é a maior nota
+
+        // faz um loop pelo array de notas
+        for (int grade : grades){
+            // se a nota for mais alta que highGrade, essa nota é atribuída a highGrade
+            if (grade > highGrade)
+            highGrade = grade;
+        } // fim do for
+
+        return highGrade;
+
+    } // fim do método getMaximum
+
+    //  determina média para o teste
+    public double getAvarage(){
+
+        int total = 0; // inicializa o total
+
+        // soma as notas do aluno
+        for (int grade : grades)
+        total += grade;
+
+        // retorna a média de notas
+        return (double) total / grades.length;
+
+    } // fim do método getAvarage
+
+    public void outputBarChart(){
+        System.out.println("Distribuição de Notas");
+
+        // armazena frequência de notas em cada intervalo de 10 notas
+        int[] frequency = new int[11];
+
+        // para cada nota, incrementa a frequência apropriada
+        for (int grade : grades)
+        ++frequency[grade /10];
+
+        // para cada frequência de nota, imprime barra no gráfico
+        for (int count = 0; count < frequency.length; count++){
+            // imprime rótulo de barra ("00-09: ", ..., "90-99: ", "100")
+            if(count == 10)
+             System.out.printf("%5d: ", 100);
+            else
+             System.out.printf("%02d-%02d: ", count * 10, count * 10 + 9);
+
+            //  imprime a barra de asteristicos
+            for ( int stars = 0; stars < frequency[count]; stars++)
+                System.out.print("*");
+
+            System.out.println(); // inicia uma nova linha de saída
+        } // fim do for
+    } // fim do método outputBarChart
+
+    // gera a saída do conteúdo do array de notas
+    public void outputGrades(){
+
+        System.err.println("As notas são:\n");
+
+        // gera a saída de nota de cada aluno
+        for (int student = 0; student < grades.length; student++)
+        System.out.printf("Estudante %2d: %3d\n", student + 1, grades [student]);
+    } // fim do método outpuGrades
+
 } // fim da classe GradeBook

@@ -9,7 +9,7 @@ public class GradeBookTeste{
 
         //criando o objeto myGradeBook da classe GradeBook
         //passa o nome do curso para o construtor
-        GradeBook myGradeBook = new GradeBook("Introdução ao Programa Java!!");
+        GradeBook myGradeBook = new GradeBook());
 
         myGradeBook.displayMessage();
         myGradeBook.inputGrades();
