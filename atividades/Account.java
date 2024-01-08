@@ -1,3 +1,4 @@
+package atividades;
 // figura 3.3 do livro
 // classe "Account" com um construto para valores do tipo flot e double
 

@@ -1,3 +1,4 @@
+package Aulas_Praticas;
 /**
  * Aqui farei testes das aulas, adicionarem ao GitIgnore
  */

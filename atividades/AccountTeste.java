@@ -1,3 +1,4 @@
+package atividades;
 //fiura 3.14 do livro
 //entrada e saída de números de ponto flutuante com objetos do Account
 import java.util.Scanner;

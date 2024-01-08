@@ -1,3 +1,4 @@
+package Aulas_Praticas;
 //Aqui irei demonstrar a capacidade da classe Invoice.
 
 import java.util.Scanner;

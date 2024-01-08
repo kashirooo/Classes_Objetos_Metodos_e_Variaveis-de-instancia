@@ -1,3 +1,4 @@
+package atividades;
 public class AtividadeTeste {
     public static void main(String[] args) {
        

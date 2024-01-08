@@ -1,3 +1,4 @@
+package Aulas_Praticas;
 import java.util.Scanner;
 
 /**
